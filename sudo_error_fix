@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Check if the user has superuser permissions
+if [ "$EUID" -ne 0 ]; then
+    echo "This script must be run as root or with superuser permissions."
+    exit 1
+fi
+
+# Check if the sudo package is installed
+if ! which sudo &>/dev/null; then
+    echo "sudo package not found. Installing..."
+
+    # Install sudo package based on distribution
+    if [ -f /etc/fedora-release ]; then
+        dnf install sudo -y
+    elif [ -f /etc/lsb-release ]; then
+        apt-get install sudo -y
+    else
+        echo "Unsupported distribution"
+        exit 1
+    fi
+fi
+
+# Verify the installation
+if which sudo &>/dev/null; then
+    echo "sudo installed successfully."
+else
+    echo "sudo installation failed."
+    exit 1
+fi

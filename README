@@ -1,0 +1,82 @@
+#  YNH Server setup with Debian 11 (Bullseye)
+
+
+# I used Debian 11.6 for this setup. After installing Debian, for some reason sudo was not installed. 
+# Created a script that checks and installs sudo on a dnf or apt based system. In this folder there should be a script called 'sudo_error_fix'
+# To run the script follow steps below. 
+
+
+
+
+# Copy:
+
+# Copy the script the target machine that does not have sudo installed. You can create a file and paste the content. Or you transferr the file or clone it from github.
+# make the script executable.
+
+``` chmod a+x sudo_error_fix ```
+
+
+Run:
+
+# To run the script, change the current user to root. Then enter the root password. 
+
+# 1. Change user to root
+``` su - ```
+
+# 2. Run script
+
+``` ./sudo_error_fix ```
+
+# Once the script is completed then you can perform tasks with sudo.. (Which really doesnt matter after YNH servers gets installed)
+
+
+
+
+# System update:
+
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
+
+# optional 
+sudo reboot
+
+
+# Install the dependencies required by Yunohost:
+
+sudo apt install curl gnupg2 ca-certificates lsb-release
+
+
+# Import Yunohost GPG key:
+
+curl https://install.yunohost.org/public.key | sudo apt-key add -
+
+
+#  Add the Yunohost repository to the system:
+
+echo "deb https://install.yunohost.org/deb stable main" | sudo tee /etc/apt/sources.list.d/yunohost.list
+
+
+# Update the system with the new repository:
+
+``` sudo apt update ```
+
+
+# Install Yunohost:
+
+``` sudo apt install yunohost ```
+
+
+# Follow rest of the install from the browser. 
+
+
+
+###########################################################################################################
+
+###########################################################################################################
+
+# Alternative methed: 
+
+# The installation steps can be done by running scipt in this folder name 'ynh_install' it advised to run the script as root. 
+
+
+
+
