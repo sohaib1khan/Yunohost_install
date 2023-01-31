@@ -19,17 +19,17 @@
         - git
         - net-tools
         - vim
+        - tree
       # Download the folder from github
-    - name:  Downloading ynh repo from github...
-      shell: git clone https://github.com/sohaib1khan/Yunohost_install.git
+    - name: cloning repo
+      ansible.builtin.include_tasks: ./tasks/clone_repo.yaml
       # Copy sudo script to home directory
+      # I have seen ths on a freshly installed bare minimum debian 11 where sudo was not installed. So i have added a script will fix the issue on a fedora or debian machine.
     - name: copying sudo fix script
       copy:
         src: ./../sudo_error_fix
-        dest: /usr/bin/
-    # I have seen ths on a freshly installed bare minimum debian 11 where sudo was not installed. So i have added a script will fix the issue on a fedora or debian machine.
-    - name: checking if sudo is installed
-      shell: ./usr/bin/sudo_error_fix
+        dest: /tmp/
+    
 
 
 

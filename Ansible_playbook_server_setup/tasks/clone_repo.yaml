@@ -1,0 +1,5 @@
+---
+-
+    become: false
+    name: clone repo
+    shell: git clone https://github.com/sohaib1khan/Yunohost_install.git
