@@ -1,6 +1,6 @@
 ---
 -
-  name: Update & installs updates
+  name: Update system
   hosts: all
 
   tasks:
@@ -10,11 +10,9 @@
       apt:
         name: "*"
         state: latest
-
-    - name: Update all packages to the latest version
+    - name: Update all packages 
       apt:
         upgrade: dist
-
     - name: Installing list of packages
       apt:
         pkg:
@@ -24,11 +22,14 @@
       # Download the folder from github
     - name:  Downloading ynh repo from github...
       shell: git clone https://github.com/sohaib1khan/Yunohost_install.git
-      # Copy sudo script to home directory     
+      # Copy sudo script to home directory
     - name: copying sudo fix script
       copy:
-        src: ../ynh_install
-        dest: /home/$USER
+        src: ./../sudo_error_fix
+        dest: /usr/bin/
+    # I have seen ths on a freshly installed bare minimum debian 11 where sudo was not installed. So i have added a script will fix the issue on a fedora or debian machine.
+    - name: checking if sudo is installed
+      shell: ./usr/bin/sudo_error_fix
 
 
 
