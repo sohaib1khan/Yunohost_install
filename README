@@ -10,7 +10,7 @@
 
 # Copy:
 
-# Copy the script the target machine that does not have sudo installed. You can create a file and paste the content. Or you transferr the file or clone it from github.
+# Copy the script the target machine that does not have sudo installed. You can create a file and paste the content. Or when you ansible playbook the script will be transferred into the /tmp directory or clone it from github.... which the playbook as well...
 # make the script executable.
 
 ``` chmod a+x sudo_error_fix ```

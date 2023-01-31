@@ -25,10 +25,10 @@
       ansible.builtin.include_tasks: ./tasks/clone_repo.yaml
       # Copy sudo script to home directory
       # I have seen ths on a freshly installed bare minimum debian 11 where sudo was not installed. So i have added a script will fix the issue on a fedora or debian machine.
-    - name: copying sudo fix script
+    - name: copying sudo fix script to /tmp directory 
       copy:
         src: ./../sudo_error_fix
-        dest: /home/
+        dest: /tmp/
     
 
 
