@@ -1,0 +1,35 @@
+---
+-
+  name: Update & installs updates
+  hosts: all
+
+  tasks:
+    - name: dpkg configure
+      shell: sudo dpkg --configure -a
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+
+    - name: Installing list of packages
+      apt:
+        pkg:
+        - git
+        - net-tools
+        - vim
+      # Download the folder from github
+    - name:  Downloading ynh repo from github...
+      shell: git clone https://github.com/sohaib1khan/Yunohost_install.git
+      # Copy sudo script to home directory     
+    - name: copying sudo fix script
+      copy:
+        src: ../ynh_install
+        dest: /home/$USER
+
+
+
+
