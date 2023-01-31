@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Update the system
-sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
+sudo apt update && sudo apt upgrade -y 
 
 # Install dependencies
 sudo apt install curl gnupg2 ca-certificates lsb-release -y
 
 # one script install
 
-curl https://raw.githubusercontent.com/YunoHost/install_script/main/testing | bash
+curl https://install.yunohost.org | bash
 
 
 # Final cleanup
@@ -18,4 +18,4 @@ sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt aut
 ######################################################################################################
 # NOTE: the below can be removed on the next version...
 
- # curl https://install.yunohost.org/switchtoTesting | bash
+ curl https://install.yunohost.org/switchtoTesting | bash
