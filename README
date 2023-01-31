@@ -1,82 +1,67 @@
-#  YNH Server setup with Debian 11 (Bullseye)
+YNH Server setup with Debian 11 (Bullseye)
 
+I used Debian 11.6 for this setup. After installing Debian, for some reason, sudo was not installed.
 
-# I used Debian 11.6 for this setup. After installing Debian, for some reason sudo was not installed. 
-# Created a script that checks and installs sudo on a dnf or apt based system. In this folder there should be a script called 'sudo_error_fix'
-# To run the script follow steps below. 
+Created a script that checks and installs sudo on a dnf or apt-based system. In this folder, there should be a script called 'sudo_error_fix'
 
+To run the script follow the steps below.
 
+Copy:
 
+Copy the script to the target machine that does not have sudo installed. You can create a file and paste the content. Or when you run ansible-playbook the script will be transferred into the /tmp directory of the remote machine or clone it from github.... which is the playbook as well :)
 
-# Copy:
+make the script executable.
 
-# Copy the script the target machine that does not have sudo installed. You can create a file and paste the content. Or when you ansible playbook the script will be transferred into the /tmp directory or clone it from github.... which the playbook as well...
-# make the script executable.
-
-``` chmod a+x sudo_error_fix ```
-
+chmod a+x sudo_error_fix
 
 Run:
 
-# To run the script, change the current user to root. Then enter the root password. 
+To run the script, change the current user to root. Then enter the root password.
 
-# 1. Change user to root
-``` su - ```
+1. Change user to root
 
-# 2. Run script
+su -
 
-``` ./sudo_error_fix ```
+2. Run script
 
-# Once the script is completed then you can perform tasks with sudo.. (Which really doesnt matter after YNH servers gets installed)
+./sudo_error_fix
 
+Once the script is completed then you can perform tasks with sudo.. (Which really doesn't matter after YNH servers get installed)
 
+System update:
 
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y 
 
-# System update:
+optional
 
-sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
-
-# optional 
 sudo reboot
 
-
-# Install the dependencies required by Yunohost:
+Install the dependencies required by Yunohost:
 
 sudo apt install curl gnupg2 ca-certificates lsb-release
 
-
-# Import Yunohost GPG key:
+Import Yunohost GPG key:
 
 curl https://install.yunohost.org/public.key | sudo apt-key add -
 
-
-#  Add the Yunohost repository to the system:
+Add the Yunohost repository to the system:
 
 echo "deb https://install.yunohost.org/deb stable main" | sudo tee /etc/apt/sources.list.d/yunohost.list
 
+Update the system with the new repository:
 
-# Update the system with the new repository:
+sudo apt update
 
-``` sudo apt update ```
+Install Yunohost:
 
+sudo apt install yunohost
 
-# Install Yunohost:
-
-``` sudo apt install yunohost ```
-
-
-# Follow rest of the install from the browser. 
-
-
+Follow rest of the install from the browser.
 
 ###########################################################################################################
 
 ###########################################################################################################
 
-# Alternative methed: 
+Alternative method:
 
-# The installation steps can be done by running scipt in this folder name 'ynh_install' it advised to run the script as root. 
-
-
-
-
+The installation steps can be done by running scipt in this folder name 'ynh_install' it is recommended to run the script as root.
