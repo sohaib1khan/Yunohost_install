@@ -28,7 +28,7 @@
     - name: copying sudo fix script
       copy:
         src: ./../sudo_error_fix
-        dest: /tmp/
+        dest: /home/
     
 
 
