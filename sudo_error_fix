@@ -15,6 +15,8 @@ if ! which sudo &>/dev/null; then
         dnf install sudo -y
     elif [ -f /etc/lsb-release ]; then
         apt-get install sudo -y
+    elif [ -f /etc/debian_version ]; then
+        apt-get install sudo -y
     else
         echo "Unsupported distribution"
         exit 1
