@@ -30,3 +30,27 @@ else
     echo "sudo installation failed."
     exit 1
 fi
+
+# Prompt for the username to add to the sudoers file
+read -p "Enter the username to add to the sudoers file: " username
+
+# Check if the user exists
+if ! id "$username" &>/dev/null; then
+    echo "The specified user does not exist."
+    exit 1
+fi
+
+# Add the user to the sudoers file based on distribution
+if [ -f /etc/fedora-release ]; then
+    echo "$username ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ]; then
+    echo "$username ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
+fi
+
+# Verify the user was added to the sudoers file
+if grep -q "$username" /etc/sudoers || grep -q "$username" /etc/sudoers.d/90-cloud-init-users; then
+    echo "$username has been added to the sudoers file successfully."
+else
+    echo "Failed to add $username to the sudoers file."
+    exit 1
+fi
